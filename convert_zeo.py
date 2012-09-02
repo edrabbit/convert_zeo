@@ -35,6 +35,7 @@ def convert_zeo_to_log(file, output_file=None, tz=None):
     all_events = []
     for z in zeo_reader:
         # Parse the detailed sleep graph (30 second intervals)
+        # TODO(ed): Make this optional as it might not be useful to everyone
         detailed_sleep_graph = z["Detailed Sleep Graph"]
         time_track = datetime.datetime.strptime(z["Start of Night"],
             '%m/%d/%Y %H:%M')
@@ -62,6 +63,7 @@ def convert_zeo_to_log(file, output_file=None, tz=None):
         all_events.append(log_line)
 
     # Output to file
+    # TODO(ed): Handle creation/appending files better.
     outfile = open(output_file, "a")
 
     for event in all_events:
