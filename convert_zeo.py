@@ -28,11 +28,12 @@ datetime_fields = ("Start of Night", "End of Night", "Rise Time",
 def add_tzinfo(dt, tz):
     return dt.replace(tzinfo=pytz.timezone(tz))
 
-def convert_zeo_to_log(file, output_file=None, tz=None):
+def convert_zeo_to_log(zeo_file, output_file=None, tz=None):
     if not tz:
         tz = "UTC"
-    zeo_reader = csv.DictReader(open('zeodata.csv', 'rb'), delimiter=",")
+    zeo_reader = csv.DictReader(open(zeo_file, 'rb'), delimiter=",")
     all_events = []
+
     for z in zeo_reader:
         # Parse the detailed sleep graph (30 second intervals)
         # TODO(ed): Make this optional as it might not be useful to everyone
